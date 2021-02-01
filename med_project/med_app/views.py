@@ -12,6 +12,12 @@ def index(request):
     return HttpResponse(response, content_type='text/json')
 
 
+def get_all_pokemon(request):
+    if request.method == 'GET':
+        Pokemon_json = serializers.serialize("json", Pokemon.objects.all())
+    return HttpResponse(Pokemon_json, content_type='text/json')
+
+
 @csrf_exempt
 def add_pokemon(request):
     if request.method == 'POST':
@@ -39,6 +45,12 @@ def add_pokemon(request):
 
             }])
             return HttpResponse(response, content_type='text/json')
+    elif request.method == "PATCH":
+        payload = json.loads(request.body)
+        p_name = payload['name']
+        p_hp = payload['hp']
+        console.log(p_name)
+        console.log(p_hp)
 
 
 # return a specific pokemons json
@@ -70,11 +82,3 @@ def pokemon(request, p_name):
                 "Error": "Pokemon Could not be Deleted!"
             }])
         return HttpResponse(response, content_type="content/type")
-
-# returns list of all pokemons
-
-
-def get_all_pokemon(request):
-    if request.method == 'GET':
-        Pokemon_json = serializers.serialize("json", Pokemon.objects.all())
-    return HttpResponse(Pokemon_json, content_type='text/json')
