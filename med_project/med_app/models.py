@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
-class Pokemmon(models.Model):
-  name = models.CharField
-  hp = models.IntegerField()
+
+
+class Pokemon(models.Model):
+    name = models.CharField(max_length=100)
+    hp = models.IntegerField()

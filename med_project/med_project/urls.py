@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('pokemon', views.add_pokemon),
-    path('<str:p_name>', views.get_pokemon)
+    path('all', views.get_all_pokemon),
+    path('<str:p_name>', views.pokemon)
 ]
